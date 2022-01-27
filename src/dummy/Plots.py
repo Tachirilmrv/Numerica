@@ -20,9 +20,9 @@ plt.plot (months, ave_max, 'r-.', months, ave_min, 'c:')
 
 
 #Info
-plt.xlabel('Months', color = '#1e8bc3')
+plt.xlabel ('Months', color = '#1e8bc3')
 plt.ylabel ('Temperature (°C)', color = '#e74c3c')
-plt.title('Temperature in Singapore', color = '#34495e')
+plt.title ('Temperature in Singapore', color = '#34495e')
 
 up_legend = mpatches.Patch (color = 'red', label = 'High')
 down_legend = mpatches.Patch (color = 'cyan', label = 'Low')
@@ -218,13 +218,13 @@ fig, ax = plt.subplots ()
 
 
 #Transformations
-ax.spines['left'].set_position('center')
-ax.spines['bottom'].set_position('zero')
-ax.spines['right'].set_color('none')
-ax.spines['top'].set_color('none')
+ax.spines ['left'].set_position ('center')
+ax.spines ['bottom'].set_position ('zero')
+ax.spines ['right'].set_color ('none')
+ax.spines ['top'].set_color ('none')
 
-ax.xaxis.set_ticks_position('bottom')
-ax.yaxis.set_ticks_position('left')
+ax.xaxis.set_ticks_position ('bottom')
+ax.yaxis.set_ticks_position ('left')
 
 
 #Plot
