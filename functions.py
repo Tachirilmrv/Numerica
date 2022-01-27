@@ -147,7 +147,7 @@ iteraciones
             return x
     raise RuntimeError("No hubo convergencia después de {} iteraciones").format(maxiter)
 
-def falsePosition(f, x0,x1,tol):
+def false_position(f, x0,x1,tol):
     """
        Halla una raíz de la función f en el intervalo [a, b] mediante el método de falsa posicion.
 
@@ -176,3 +176,24 @@ def falsePosition(f, x0,x1,tol):
         condition = abs(f(x2)) > tol
 
     print('\nRequired root is: %0.8f' % x2)
+
+def eval_poly(coefficients, value):
+    '''
+    Evalua el polinomio coeffcients para el valor dado value
+
+    Argumentos:\n
+    coefficients - coeficientes del polinomio a evaluar\n
+    value - valor a evaluar en el polinomio\n
+
+    Devuelve:\n
+    x - valor del polinomio coefficients evaluado en value
+    '''
+
+    i = 1
+    result = 0
+    for coef in coefficients:
+        print('iteracion {}'.format(i))
+        result = result + coef * (value**(len(coefficients)-i))
+        print('result: {}'.format(result))
+        i = i + 1 
+    return result
