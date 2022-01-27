@@ -146,3 +146,33 @@ iteraciones
         if abs(dx / x) < xtol and abs(f(x)) < ftol:
             return x
     raise RuntimeError("No hubo convergencia después de {} iteraciones").format(maxiter)
+
+def falsePosition(f, x0,x1,tol):
+    """
+       Halla una raíz de la función f en el intervalo [a, b] mediante el método de falsa posicion.
+
+    Argumentos\n
+    f - Función, debe ser tal que f(a) f(b) &lt; 0\n
+    a - Extremo inferior del intervalo\n
+    b - Extremo superior del intervalo\n
+    tol - Cota para el error torelable
+
+    Devuelve
+    x - Raíz de f en [a, b]
+        """
+    step = 1
+    print('\n\n*** FALSE POSITION METHOD IMPLEMENTATION ***')
+    condition = True
+    while condition:
+        x2 = x0 - (x1-x0) * f(x0)/( f(x1) - f(x0) )
+        print('Iteration-%d, x2 = %0.6f and f(x2) = %0.6f' % (step, x2, f(x2)))
+
+        if f(x0) * f(x2) < 0:
+            x1 = x2
+        else:
+            x0 = x2
+
+        step = step + 1
+        condition = abs(f(x2)) > tol
+
+    print('\nRequired root is: %0.8f' % x2)
