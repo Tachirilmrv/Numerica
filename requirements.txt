@@ -1,0 +1,21 @@
+Raíces:
+	Lagrange	ok
+	Descartes	ok
+	Bisección	ok
+	Regula Falsi	ok
+	Newton		ok
+	Secante		ok
+
+SEL:
+	Jacobi		semi-ok
+	Gauss-Seidel	ok (arreglar error)
+
+Interpolación:
+	Lagrange	nop
+	Newton		nop
+
+
+	 
+
+
+

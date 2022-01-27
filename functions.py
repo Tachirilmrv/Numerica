@@ -103,14 +103,18 @@ def find_roots (coef):
 def biseccion (f, a, b, tol = 1.0e-6):
     '''
     Halla una raíz de la función f en el intervalo [a, b] mediante el método de bisección.
-    
-    Argumentos\n
+
+    Argumentos
+    ----------
+
     f - Función, debe ser tal que f(a) f(b) &lt; 0\n
     a - Extremo inferior del intervalo\n
     b - Extremo superior del intervalo\n
     tol (opcional) - Cota para el error absoluto de la x
 
     Devuelve
+    --------
+
     x - Raíz de f en [a, b]
     '''
 
