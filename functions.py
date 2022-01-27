@@ -197,3 +197,25 @@ def eval_poly(coefficients, value):
         print('result: {}'.format(result))
         i = i + 1 
     return result
+
+def secantes(f, x0, x1, e):
+    '''
+    Hallar la unica raiz en el intervalo [x0,x1] con toleracia e mediante el metodo de las secantes\n
+
+    Argumentos:\n
+    f - funcion\n
+    x0 - extremo inferior del intervalo\n
+    x1 - extremo superior del intervalo\n
+    e - tolerancia del error\n
+
+    Devuelve:\n
+    x - raiz en el intervalo [a,b]
+    '''
+    y0 = f(x0)
+    y1 = f(x1)
+    xc = x1 - ((x1-x0)/(y1-y0))*y1
+    yc = f(xc)
+    error = abs(xc - x1)
+    if error < e:
+        return xc
+    return secantes(f, x1, xc, e)
