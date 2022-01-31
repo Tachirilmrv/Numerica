@@ -57,21 +57,47 @@ def coefficients (input):
     coeficientes.reverse ()
 
     if coeficientes [0] < 0:
-        coeficientes = [i * (-1) for i in coeficientes]
+        coeficientes = positive_max_grade (coeficientes)
 
     return coeficientes
 
-def descartes (values):
+def positive_max_grade (values):
+    '''
+    Transforma la ecuacion y convierte el coeficiente de mayor grado a positivo
+
+    Argumentos:
+    ----------
+    values - coeficientes de la ecuacion
+
+    Devuelve:
+    --------
+    Lista de los coeficientes transformados
+    '''
+    coeficientes = [i * (-1) for i in values]
+    return coeficientes
+
+def descartes (values, interval = True):
     '''
     Aplica la regla de descartes para hallar la mayor cantidad de raíces del polinomio
     
-    Argumentos
-    values - lista de los valores de los coeficientes
+    Argumentos:
+    ------------
+    values - lista de los valores de los coeficientes\n
+    interval - boolean, True para intervalo positivo(default), false para intervalo negativo
     
-    Devuelve
-    Cantidad de raíces del polinomio
+    Devuelve:
+    ----------
+    Cantidad de raíces del polinomio en el intervalo dado
     '''
 
+    if not interval:
+        result = aux_descartes (negative_interval (values))
+    else:
+        result = aux_descartes (values)
+
+    return result
+
+def aux_descartes (values):
     value = values [0]
     count = 0
 
@@ -82,12 +108,57 @@ def descartes (values):
 
     return count
 
-def lagrange (values):
+def negative_interval (values):
+    '''
+    Transforma la ecuacion para hallar los ceros del intervalo negativo
+
+    Argumentos:
+    ----------
+    values - coeficientes de la ecuacion
+
+    Devuelve:
+    --------
+    La lista de los coeficientes para el intervalo negativo
+    '''
+    result = list.copy(values) 
+    if len (values) % 2 == 0: #si tiene una cantidad par de coeficientes significa que el grado es impar
+        i = 0
+        result = positive_max_grade(values)
+    else:
+        i = 1
+
+    for v in range (i,len (result) - 1, 2):
+        result[v] = result[v] * (-1)
+
+    return result
+
+def lagrange(values, interval = True):
+    '''
+    Aplica la regla de lagrange para acotar la raíz de un polinomio
+    
+    Argumentos:
+    ------------
+    values - lista de los valores de los coeficientes\n
+    interval - boolean, True para intervalo positivo(default), false para intervalo negativo
+    
+    Devuelve:
+    ----------
+    Valor acotado del intervalo de la raiz
+    '''
+    if not interval:
+        result = aux_lagrange (negative_interval (values))
+    else:
+        result = aux_lagrange (values)
+
+    return result
+
+
+def aux_lagrange (values):
     b = max (max (values), abs (min (values) ) )
     k = find_k (values)
 
     if k == None:
-        raise NameError ('No tiene raices')
+        return None
 
     return 1 + math.pow (b / values [0], 1 / k)
 
