@@ -8,6 +8,8 @@ import re as r
 import math
 import numpy as np
 
+
+
 def coefficients (input):
     '''
     Argumento
@@ -215,9 +217,7 @@ def eval_poly (coefficients, value):
     result = 0
 
     for coef in coefficients:
-        print ('iteracion {}'.format (i) )
         result = result + coef * (value ** (len (coefficients) - i) )
-        print ('result: {}'.format (result) )
         i = i + 1
 
     return result
