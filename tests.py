@@ -1,4 +1,4 @@
-from src.complementaryMethods import functions
+from src.numericalMethods import RootFinding
 
 # "23x**3 + 5x**2 + 10x + 5",
 # "x-x**2-1",
@@ -9,9 +9,9 @@ ejemplos = ["x-x**2-1",
 
 if __name__ == '__main__':
     for e in ejemplos:
-        test = functions.coefficients(e)
+        test = RootFinding.coefficients(e)
         print(e, "\n", test)
-        print('Descartes positivo: {}'.format (functions.descartes(test)))
-        print('Descartes negativo: {}'.format (functions.descartes(test, False)))
-        print('Lagrange positivo: {}'.format(functions.lagrange(test)))
-        print('Lagrange negativo: {}'.format(functions.lagrange(test, False)))
+        print('Descartes positivo: {}'.format (RootFinding.descartes(test)))
+        print('Descartes negativo: {}'.format (RootFinding.descartes(test, False)))
+        print('Lagrange positivo: {}'.format(RootFinding.lagrange(test)))
+        print('Lagrange negativo: {}'.format(RootFinding.lagrange(test, False)))

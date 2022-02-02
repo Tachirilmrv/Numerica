@@ -1,21 +1,3 @@
-Raíces:
-	Lagrange	ok
-	Descartes	ok
-	Bisección	ok
-	Regula Falsi	ok
-	Newton		ok
-	Secante		ok
-
-SEL:
-	Jacobi		semi-ok
-	Gauss-Seidel	ok (arreglar error)
-
-Interpolación:
-	Lagrange	nop
-	Newton		nop
-
-
-	 
-
-
-
+numpy~=1.21.2
+matplotlib~=3.5.0
+scipy~=1.7.3

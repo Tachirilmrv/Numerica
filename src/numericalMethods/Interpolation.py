@@ -1,3 +1,4 @@
+import numpy
 import numpy as np
 import numpy.polynomial.polynomial as poly
 import matplotlib.pyplot as plt
@@ -30,7 +31,6 @@ plt.grid ()
 plt.legend ()
 plt.show ()
 
-
 f = lagrange (x, y)
 
 fig = plt.figure (figsize = (10,8) )
@@ -41,4 +41,7 @@ plt.xlabel ('x')
 plt.ylabel ('y')
 plt.show ()
 
-print (f)
+print (P1)
+print (P2)
+print (P3)
+print (f"Polinomio de LaGrange {f}" )
