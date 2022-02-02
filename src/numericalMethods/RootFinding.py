@@ -1,12 +1,16 @@
 '''
 Búsqueda de raíces
-Este módulo contiene métodos para la búsqueda de raíces de ecuaciones de la forma f(x)=0, con f funcion real de variable real, continua y de derivada continua
+Este módulo contiene métodos para la búsqueda de raíces de equationes de la forma f(x)=0, con f funcion real de variable real, continua y de derivada continua
 '''
 
-
 import numpy as np
+from sympy import *
 
+x = Symbol ('x')
 
+def declare_function(equation):
+    global x
+    return sympify(equation)
 
 def biseccion (f, a, b, tol = 1.0e-6):
     '''
@@ -26,37 +30,40 @@ def biseccion (f, a, b, tol = 1.0e-6):
     x - Raíz de f en [a, b]
     '''
 
+    global x
     if a > b:
         raise ValueError ("Intervalo mal definido")
-    if f (a) * f (b) >= 0.0:
+    if f.subs (x, a) * f.subs (x, b) >= 0.0:
         raise ValueError ("La función debe cambiar de signo en el intervalo")
     if tol <= 0:
         raise ValueError ("La cota de error debe ser un número positivo")
 
-    x = (a + b) / 2.0
+    half = (a + b) / 2.0
 
     while True:
         if b - a < tol:
-            return x
-        elif np.sign (f (a) ) * np.sign (f (x) ) > 0:
-            a = x
+            return half
+        elif f.subs (x, a) * f.subs (x, half) > 0:
+            a = half
         else:
-            b = x
-        x = (a + b) / 2.0
+            b = half
+        half = (a + b) / 2.0
 
-def newton (f, df, x_0, maxiter = 50, xtol = 1.0e-6, ftol = 1.0e-6):
+def newton_rhapson(equation,x_0,es):
     '''
     Halla la raíz de la función f en el entorno de x_0 mediante el método de
-    Newton.\n
-    Argumentos:\n
+    Newton.
+
+    Argumentos:
+    ----------
     f - Función\n
-    df - Función, debe ser la función derivada de f\n
     x_0 - Punto de partida del método\n
-    maxiter (opcional) - Número máximo de iteraciones\n
-    xtol (opcional) - Cota para el error relativo para la raíz\n
-    ftol (opcional) - Cota para el valor de la función\n
-    Devuelve:\n
+    es - tolerancia estimada
+
+    Devuelve:
+    ---------
     x - Raíz de la ecuación en el entorno de x_0
+
     Excepciones
     -----------
     RuntimeError - No hubo convergencia superado el número máximo de iteraciones
@@ -64,15 +71,21 @@ def newton (f, df, x_0, maxiter = 50, xtol = 1.0e-6, ftol = 1.0e-6):
     Exception - El valor de x se sale del dominio de definición de f
     '''
 
-    x = float (x_0) # Se convierte a número de coma flotante
-    for i in range (maxiter):
-        dx = -f (x) / df (x) # ¡Aquí se puede producir una división por cero!
-        # Tambin x puede haber quedado fuera del dominio
-        x = x + dx
-        if abs (dx / x) < xtol and abs (f (x) ) < ftol:
-            return x
 
-    raise RuntimeError ("No hubo convergencia después de {} iteraciones".format (maxiter) )
+    global x
+    equation = declare_function (equation)
+    derivate = diff (equation)
+    f_NR=x-(equation/derivate)#formula de Newton Rhapson
+    ea=100 #error aproximado 100%
+    x_r=float(x_0)
+
+    while ea>es:
+        x_anterior=x_r
+        x_r=f_NR.subs(x,x_anterior)
+        if x_r !=0:
+            ea=abs((x_r-x_anterior)/x_r)*100
+            
+    return x_r
 
 def false_position (f, x0, x1, tol):
     '''
