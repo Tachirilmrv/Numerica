@@ -41,4 +41,4 @@ plt.xlabel ('x')
 plt.ylabel ('y')
 plt.show ()
 
-print (f (1.5) )
+print (f)
