@@ -107,16 +107,16 @@ def false_position (f, x0, x1, tol):
     print ('\n\n*** FALSE POSITION METHOD IMPLEMENTATION ***')
 
     while condition:
-        x2 = x0 - (x1 - x0) * f(x0) / (f (x1) - f (x0) )
+        x2 = x0 - (x1 - x0) * f.subs (x0) / (f.subs (x1) - f.subs (x0) )
         print ('Iteration-%d, x2 = %0.6f and f(x2) = %0.6f' % (step, x2, f (x2) ) )
 
-        if f (x0) * f (x2) < 0:
+        if f.subs (x0) * f.subs (x2) < 0:
             x1 = x2
         else:
             x0 = x2
 
         step = step + 1
-        condition = abs (f (x2) ) > tol
+        condition = abs (f.subs (x2) ) > tol
 
     print ('\nRequired root is: %0.8f' % x2)
 
