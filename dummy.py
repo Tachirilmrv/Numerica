@@ -1,23 +1,15 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import numpy.polynomial as pol
-
-from src.complementaryMethods import Polynom
+import mpmath as mp
 
 
+mp.mp.dps = 25
+mp.mp.pretty = True
 
-a = Polynom.poly_coefficients("5x^2-41x+7")
-b = a[::-1]
+mp.cplot(lambda z: z, [-2, 2], [-10, 10])
 
-p1 = pol.Polynomial (b)
+r, R = 1, 2.5
+f = lambda u, v: [r*mp.cos(u), (R+r*mp.sin(u))*mp.cos(v), (R+r*mp.sin(u))*mp.sin(v)]
+mp.splot(f, [0, float(2*mp.pi)], [0, float(2*mp.pi)],points=200,dpi=120)
 
-x = np.linspace(3, 5, 500)
-y = p1(x)
-
-print(p1)
-print(p1.deriv() )
-print(min(y))
-
-plt.plot (x, y)
-plt.grid ()
-plt.show ()
+print(mp.mpf(2) ** mp.mpf(0.5) )
+print(2 * mp.pi)
+print(mp.mp)
