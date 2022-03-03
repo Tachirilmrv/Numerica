@@ -28,6 +28,7 @@ def bolzano_Gauchy(f, a, b):
     Booleano - indica si se encontró o no un cero en el intervalo
 
     """
+    
     return f.subs(x, a) * f.subs(x, b) < 0
 
 
@@ -89,7 +90,6 @@ def newton_rhapson(equation,x_0,es):
     ZeroDivisionError - La derivada se anuló en algún punto
     Exception - El valor de x se sale del dominio de definición de f
     """
-
 
     global x
     equation = declare_function (equation)

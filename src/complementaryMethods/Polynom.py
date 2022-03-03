@@ -43,7 +43,7 @@ def poly_coefficients(raw_polynomial):
 
        #exp = ord (exp) & 0x000F
         try:
-            c[int(exp) ] = c[int(exp) ] + float(coef)
+            c[int(exp)] = c[int(exp)] + float(coef)
         except KeyError:
             c[int (exp)] = float(coef)
 
