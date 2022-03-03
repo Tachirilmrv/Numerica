@@ -1,9 +1,8 @@
-'''
+"""
 Búsqueda de raíces
 Este módulo contiene métodos para la búsqueda de raíces de equationes de la forma f(x)=0, con f funcion real de variable real, continua y de derivada continua
-'''
+"""
 
-import numpy as np
 from sympy import *
 
 x = Symbol ('x')
@@ -12,8 +11,28 @@ def declare_function(equation):
     global x
     return sympify(equation)
 
+def bolzano_Gauchy(f, a, b):
+    """
+    Halla aplicando el teorema de Bolzano-Cauchy si existe un cero en la funcion f dentro del intervalo cerrado [a,b]
+
+    Argumentos
+    ----------
+
+    f - Función a analizar\n
+    a - Extremo inferior del intervalo\n
+    b - Extremo superior del intervalo\n
+
+    Devuelve
+    --------
+
+    Booleano - indica si se encontró o no un cero en el intervalo
+
+    """
+    return f.subs(x, a) * f.subs(x, b) < 0
+
+
 def biseccion (f, a, b, tol = 1.0e-6):
-    '''
+    """
     Halla una raíz de la función f en el intervalo [a, b] mediante el método de bisección.
 
     Argumentos
@@ -28,7 +47,7 @@ def biseccion (f, a, b, tol = 1.0e-6):
     --------
 
     x - Raíz de f en [a, b]
-    '''
+    """
 
     global x
     if a > b:
@@ -50,7 +69,7 @@ def biseccion (f, a, b, tol = 1.0e-6):
         half = (a + b) / 2.0
 
 def newton_rhapson(equation,x_0,es):
-    '''
+    """
     Halla la raíz de la función f en el entorno de x_0 mediante el método de
     Newton.
 
@@ -69,7 +88,7 @@ def newton_rhapson(equation,x_0,es):
     RuntimeError - No hubo convergencia superado el número máximo de iteraciones
     ZeroDivisionError - La derivada se anuló en algún punto
     Exception - El valor de x se sale del dominio de definición de f
-    '''
+    """
 
 
     global x
@@ -88,7 +107,7 @@ def newton_rhapson(equation,x_0,es):
     return x_r
 
 def false_position (f, x0, x1, tol):
-    '''
+    """
     Halla una raíz de la función f en el intervalo [a, b] mediante el método de falsa posición.
 
     Argumentos\n
@@ -99,7 +118,7 @@ def false_position (f, x0, x1, tol):
 
     Devuelve
     x - Raíz de f en [a, b]
-    '''
+    """
 
     step = 1
     condition = True
@@ -121,7 +140,7 @@ def false_position (f, x0, x1, tol):
     print ('\nRequired root is: %0.8f' % x2)
 
 def eval_poly (coefficients, value):
-    '''
+    """
     Evalua el polinomio coeffcients para el valor dado value
 
     Argumentos:\n
@@ -130,7 +149,7 @@ def eval_poly (coefficients, value):
 
     Devuelve:\n
     x - valor del polinomio coefficients evaluado en value
-    '''
+    """
 
     i = 1
     result = 0
@@ -142,7 +161,7 @@ def eval_poly (coefficients, value):
     return result
 
 def secantes (f, x0, x1, e):
-    '''
+    """
     Hallar la única raíz en el intervalo [x0,x1] con tolerancia e, mediante el método de las secantes\n
 
     Argumentos:\n
@@ -153,7 +172,7 @@ def secantes (f, x0, x1, e):
 
     Devuelve:\n
     x - raíz en el intervalo [a,b]
-    '''
+    """
 
     y0 = f (x0)
     y1 = f (x1)
