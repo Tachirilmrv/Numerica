@@ -1,17 +1,15 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import numpy.polynomial as pol
+import mpmath as mp
 
 
+mp.mp.dps = 25
+mp.mp.pretty = True
 
-a = [1, 0, 0, 0, 0]
-b = a[::-1]
+mp.cplot(lambda z: z, [-2, 2], [-10, 10])
 
-p1 = pol.Polynomial (b)
+r, R = 1, 2.5
+f = lambda u, v: [r*mp.cos(u), (R+r*mp.sin(u))*mp.cos(v), (R+r*mp.sin(u))*mp.sin(v)]
+mp.splot(f, [0, float(2*mp.pi)], [0, float(2*mp.pi)],points=200,dpi=120)
 
-x = np.linspace(-10, 10, 500)
-y = p1(x)
-
-plt.plot (x, y)
-plt.grid ()
-plt.show ()
+print(mp.mpf(2) ** mp.mpf(0.5) )
+print(2 * mp.pi)
+print(mp.mp)
