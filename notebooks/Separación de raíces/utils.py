@@ -1,7 +1,5 @@
 import re
 
-
-
 def poly_coefficients(raw_polynomial):
     """
     Argumentos:
@@ -76,3 +74,34 @@ def positive_max_grade(values):
     coefficients = [i * (-1) for i in values]
 
     return coefficients
+
+def negative_interval(values):
+    """
+    Transforma la ecuacion para hallar los ceros del intervalo negativo
+
+    Argumentos:
+    ----------
+    values - coeficientes de la ecuacion
+
+    Devuelve:
+    --------
+    La lista de los coeficientes para el intervalo negativo
+    """
+
+    result = list.copy(values)
+
+    if len(values) % 2 == 0:  # si tiene una cantidad par de coeficientes significa que el grado es impar
+        i = 0
+        result = positive_max_grade(values)
+    else:
+        i = 1
+
+    for v in range(i, len(result) - 1, 2):
+        result[v] = result[v] * (-1)
+
+    return result
+
+def find_k(values: list) -> int:
+    for i in range(len(values)):
+        if values [i] < 0:
+            return i
