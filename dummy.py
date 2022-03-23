@@ -1,15 +1,15 @@
-import mpmath as mp
+import numpy as np
+
+from joblib import Parallel, delayed
 
 
-mp.mp.dps = 25
-mp.mp.pretty = True
 
-mp.cplot(lambda z: z, [-2, 2], [-10, 10])
+def random_square(seed):
+    np.random.seed(seed)
 
-r, R = 1, 2.5
-f = lambda u, v: [r*mp.cos(u), (R+r*mp.sin(u))*mp.cos(v), (R+r*mp.sin(u))*mp.sin(v)]
-mp.splot(f, [0, float(2*mp.pi)], [0, float(2*mp.pi)],points=200,dpi=120)
+    random_num = np.random.randint(0, 10)
 
-print(mp.mpf(2) ** mp.mpf(0.5) )
-print(2 * mp.pi)
-print(mp.mp)
+    return random_num ** 2
+
+results = Parallel(n_jobs = -1, backend = "multiprocessing", verbose = 1) \
+    (delayed(random_square)(i) for i in range(1000000) )
