@@ -1,15 +1,16 @@
-import numpy as np
+xi = [0.3, 0.4]
+yi = [0.5477, 0.6325]
 
-from joblib import Parallel, delayed
+x0 = 0.35
+result = 0
 
+for i in range(len(xi) ):
+    l = 1
 
+    for j in range(len(xi) ):
+        if j != i:
+            l = l * ( (x0 - xi[j] ) / (xi[i] - xi[j] ) )
 
-def random_square(seed):
-    np.random.seed(seed)
+    result = result + l * yi[i]
 
-    random_num = np.random.randint(0, 10)
-
-    return random_num ** 2
-
-results = Parallel(n_jobs = -1, backend = "multiprocessing", verbose = 1) \
-    (delayed(random_square)(i) for i in range(1000000) )
+print(result)
