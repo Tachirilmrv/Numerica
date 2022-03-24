@@ -12,6 +12,7 @@ class TestCase:
                                          "25x^2"])
     def test_polys(self, example):
         test = Polynom.poly_coefficients(example)
+        
 
         print(example, "\n", test)
         print('Descartes positivo: {}'.format(RootF.descartes(test)))
