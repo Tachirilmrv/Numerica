@@ -1,22 +1,47 @@
-import numpy as np
+from numpy import *
+import numpy.polynomial as pol
 
-def factor_converg(m):
-    result = [sum(abs(m[:, i] ) for i in range (len(m) ) ) ]
 
-    return max(result[0] )
+def biseccion_opt (a, b, f, d, tol = 1.0e-6):
+    i = 1
 
-def diag_pred(a):
-    result = [abs(a[i][j] / a[i][i] )  for i in range(len(a) ) for j in range(len(a[i, ] ) ) if j != i]
+    x1 = (a + b) / 2 - d / 2
+    x2 = (a + b) / 2 + d / 2
 
-    print( (np.array(result) < 1).all() )
+    y1 = f (x1)
+    y2 = f (x2)
 
-a = np.array( [ [7, 3, 1],
-                [2, -6, 3],
-                [-1, 2, 5] ] )
+    l = b - a
 
-m = np.array( [ [0, 0.75, -1.25],
-                [-1.5, 0, -1],
-                [-1.333, 0.666, 0] ] )
+    print ("{}\t {:.5f}\t {:.5f}\t {:.5f}\t {:.5f}\t {:.5f}\t {:.5f}\t {:.5f}".format (i, a, b, l, x1, x2, y1, y2) )
 
-print(factor_converg(m) )
-diag_pred(a)
+    while l > tol:
+        if y1 < y2:
+            a = x1
+        else:
+            b = x2
+
+        x1 = (a + b) / 2 - d / 2
+        x2 = (a + b) / 2 + d / 2
+
+        y1 = f (x1)
+        y2 = f (x2)
+
+        l = b - a
+        i += 1
+
+        print ("{}\t {:.5f}\t {:.5f}\t {:.5f}\t {:.5f}\t {:.5f}\t {:.5f}\t {:.5f}".format (i, a, b, l, x1, x2, y1, y2))
+
+    print (f"El intervalo obtenido es: [{a}, {b}]")
+
+
+a = 2
+b = 2.1
+f = lambda x : x * sin(x)
+d = 0.0001
+tol = 0.001
+
+print ("{:<3}\t {:<7}\t {:<7}\t {:<7}\t {:<7}\t {:<7}\t {:<7}\t {:<7}".format("i", "a", "b", "l", "x1", "x2", "y1", "y2") )
+print ('-' * 120)
+
+biseccion_opt(a, b, f, d, tol)
